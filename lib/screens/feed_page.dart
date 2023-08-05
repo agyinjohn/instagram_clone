@@ -20,10 +20,9 @@ class _FeedPageState extends State<FeedPage> {
         backgroundColor: mobileBacgroundColor,
         title:
             // ignore: deprecated_member_use
-            SvgPicture.asset(
-          'assets/ic_instagram.svg',
-          color: primaryColor,
-          height: 32,
+            Image.asset(
+          'assets/apex1.png',
+          height: 100,
         ),
         actions: [
           IconButton(

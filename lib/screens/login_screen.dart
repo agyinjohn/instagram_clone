@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:instagram_clone/screens/home_screen.dart';
+
 import 'package:instagram_clone/screens/signup_screen.dart';
 import 'package:instagram_clone/utils/global_variables.dart';
 import 'package:instagram_clone/utils/pick_image_method.dart';
@@ -27,36 +27,30 @@ class _LoginScreenState extends State<LoginScreen> {
       TextEditingController();
   bool isloading = false;
 
-  Future<String> logUserIn() async {
-    setState(() {
-      isloading = true;
-    });
-    final result = await Authentication().loginUser(
-        passwordTextEditingController.text.trim(),
-        emailTextEditingController.text.trim());
-
-    setState(() {
-      isloading = false;
-    });
-    if (result == 'Successfull') {
+  logUserIn() async {
+    try {
+      setState(() {
+        isloading = true;
+      });
+      final result = await Authentication().loginUser(
+          passwordTextEditingController.text.trim(),
+          emailTextEditingController.text.trim());
       Fluttertoast.showToast(msg: result);
-      print(result);
+
       // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => const ResponsiveScreen(
               mobileScreen: MobileScreen(), webScreen: WebScreen())));
-    } else {
-      // ignore: use_build_context_synchronously
-      showSnackBarAction(context, result);
+    } catch (err) {
+      showSnackBarAction(context, err.toString());
     }
-    return result;
   }
 
   @override
   void dispose() {
+    super.dispose();
     emailTextEditingController.dispose();
     passwordTextEditingController.dispose();
-    super.dispose();
   }
 
   @override
@@ -77,14 +71,18 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Container(),
             ),
             // ignore: deprecated_member_use
-            SvgPicture.asset('assets/ic_instagram.svg', color: primaryColor),
+            // SvgPicture.asset('assets/ic_instagram.svg', color: primaryColor),
+            Image.asset(
+              'assets/apex1.png',
+              height: 180,
+            ),
             const SizedBox(
-              height: 64,
+              height: 30,
             ),
             TextFieldInput(
                 textEditingController: emailTextEditingController,
                 textInputType: TextInputType.emailAddress,
-                hintText: 'Enter email'),
+                hintText: 'Your email address'),
             const SizedBox(
               height: 25,
             ),

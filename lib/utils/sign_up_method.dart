@@ -63,12 +63,12 @@ class Authentication {
   }
 
   Future<String> loginUser(String password, String email) async {
-    String result = 'An error occured';
+    String result = 'All fields are required';
     if (password.isNotEmpty || email.isNotEmpty) {
       try {
         await _auth.signInWithEmailAndPassword(
             email: email, password: password);
-        result = 'Successfull';
+        result = 'Successful';
       } catch (err) {
         result = err.toString();
         print(err);
@@ -76,5 +76,9 @@ class Authentication {
     }
 
     return result;
+  }
+
+  signOut() {
+    _auth.signOut();
   }
 }

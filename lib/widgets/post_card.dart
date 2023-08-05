@@ -60,38 +60,42 @@ class _PostCardState extends State<PostCard> {
                     ),
                   ),
                 ),
-                IconButton(
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) => Dialog(
-                              child: ListView(
-                                shrinkWrap: true,
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 16,
-                                ),
-                                children: [
-                                  'Delete',
-                                ]
-                                    .map(
-                                      (e) => InkWell(
-                                        onTap: () {
-                                          FireStoreMethods().deletePost(
-                                              widget.snap['postId']);
-                                        },
-                                        child: Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 12, horizontal: 16),
-                                          child: Text(e),
-                                        ),
+                widget.snap['uid'] == user!.uid
+                    ? IconButton(
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) => Dialog(
+                                    child: ListView(
+                                      shrinkWrap: true,
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 16,
                                       ),
-                                    )
-                                    .toList(),
-                              ),
-                            ));
-                  },
-                  icon: const Icon(Icons.more_vert),
-                ),
+                                      children: [
+                                        'Delete',
+                                      ]
+                                          .map(
+                                            (e) => InkWell(
+                                              onTap: () {
+                                                FireStoreMethods().deletePost(
+                                                    widget.snap['postId']);
+                                              },
+                                              child: Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 12,
+                                                        horizontal: 16),
+                                                child: Text(e),
+                                              ),
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
+                                  ));
+                        },
+                        icon: const Icon(Icons.more_vert),
+                      )
+                    : const SizedBox(),
               ],
             ),
           ),
@@ -100,7 +104,7 @@ class _PostCardState extends State<PostCard> {
               await FireStoreMethods().postLikes(
                   likes: widget.snap['likes'],
                   postId: widget.snap['postId'],
-                  uid: user!.uid);
+                  uid: user.uid);
               setState(() {
                 isLikeAnimating = true;
               });
@@ -138,7 +142,7 @@ class _PostCardState extends State<PostCard> {
           Row(
             children: [
               LikeAnimation(
-                isAnimating: widget.snap['likes'].contains(user!.uid),
+                isAnimating: widget.snap['likes'].contains(user.uid),
                 isSmallLike: true,
                 child: IconButton(
                   onPressed: () async {

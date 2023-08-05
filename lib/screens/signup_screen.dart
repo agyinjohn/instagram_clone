@@ -79,11 +79,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
         body: SafeArea(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 32),
-        width: double.infinity,
+        width: size.width,
+        height: size.height,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -92,9 +94,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Container(),
             ),
             // ignore: deprecated_member_use
-            SvgPicture.asset('assets/ic_instagram.svg', color: primaryColor),
+            // SvgPicture.asset('assets/ic_instagram.svg', color: primaryColor),
+            Image.asset(
+              'assets/apex1.png',
+              height: 120,
+              width: 250,
+            ),
             const SizedBox(
-              height: 55,
+              height: 20,
             ),
             Stack(children: [
               image != null
@@ -129,14 +136,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 textInputType: TextInputType.text,
                 hintText: 'Enter your username'),
             const SizedBox(
-              height: 25,
+              height: 20,
             ),
             TextFieldInput(
                 textEditingController: emailTextEditingController,
                 textInputType: TextInputType.emailAddress,
                 hintText: 'Enter your email'),
             const SizedBox(
-              height: 25,
+              height: 20,
             ),
             TextFieldInput(
               textEditingController: passwordTextEditingController,
@@ -145,14 +152,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
               isPass: true,
             ),
             const SizedBox(
-              height: 25,
+              height: 20,
             ),
             TextFieldInput(
                 textEditingController: bioController,
                 textInputType: TextInputType.text,
                 hintText: 'Enter your bio'),
             const SizedBox(
-              height: 25,
+              height: 20,
             ),
 
             InkWell(
@@ -179,10 +186,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
             const SizedBox(
               height: 12,
             ),
-            Flexible(
-              flex: 2,
-              child: Container(),
-            ),
+            // Flexible(
+            //   flex: 2,
+            //   child: Container(),
+            // ),
             GestureDetector(
               onTap: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
